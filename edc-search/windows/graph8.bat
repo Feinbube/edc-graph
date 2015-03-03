@@ -1,0 +1,1 @@
+Release\EDCSearch.exe -s -r 2 < ..\graphs\8.graph
