@@ -1,0 +1,1 @@
+Release\EDCSearch.exe -s -r 2 < ..\graphs\cai-haratsch-mutlu-mai-2012-6.graph
