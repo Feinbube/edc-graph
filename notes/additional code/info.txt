@@ -1,0 +1,15 @@
+Hallo Frank,
+ 
+wie gerade besprochen anbei zum einen das aktuelle Paper und dann noch
+die zwei Quellcodedateien zur "Optimumberechnung" also in
+- edc-code-bose-elmougy-tallini-2007
+wird der Code berechnet
+- edc-graph-check-code
+wird anstatt der heuristik, der bereits vorhandene code verwendet
+um die Wahrscheinlichkeit von nicht erkannten Fehler zu bestimmen
+(Ist im Prinzip die Gleiche Datei wie die Heuristik, nur vieles
+auskommentiert)
+ 
+Viele Gruesse
+
+Guenther

@@ -1,0 +1,36 @@
+	• "Manche Nodes müssen sehr oft zugegriffen werden, andere selten"
+	• Pro Durchlauf 
+		○ Wird der Node mit dem höchsten Rank ausgewählt
+		○ Und seine Nachbarn entfernt (Rank auf -1)
+		○ Und der Rank von deren Nachbarn aktualisiert
+	• -> Wie kann man auf die besten schnell zugreifen? [geeignete Datenstruktur?]
+
+	• Speicherplatzoptimierung:
+		○ Native Daten direkt berechnet, statt Text in Datei parsen
+		○ Kanten mit sehr geringen Fehlerwarscheinlichkeiten nicht betrachten (wenn die Wahrscheinlichkeit sehr viel geringer ist als die Wahrscheinlichkeit, dass man im Modell was vergessen hat)
+
+Heuristic
+	• Heuristic ist schlechter als Unidirectional (Gold Standard)
+		○ Aber nützlich wenn man realistische Fehlerverteilungen hat
+		○ Oder (wie in der echten Welt) auch Bidirektionale Abhängigkeiten hat
+	• Verwendet gemessene Zahlen für eine Fehlerverteilung (Messwerte) für die noch kein klares Fehlermodell gibt
+		○ Statt Wahrscheinlichkeiten könnte man für den Rank auch die Anzahl der Kanten nehmen
+			§ Dann gibt es viele mit dem gleichen Rank
+			§ Alternativ kann man auch Ranks als gleich betrachten, die einen ähnlichen Rank haben (Maximale Abweichung festlegen)
+	
+Konkrete Weiterentwicklungsideen:
+	• Grapherzeugung nach dem Starten, anstatt ihn einzulesen (EDCGraph und EDCSearch vereinen)
+	• Rank am Anfang berechnen und jeweils speichern
+		○ Geeignete schnell zugreifbare Datenstruktur finden
+	• Wenn ein Node entfernt wird, nur die Ranks verbundener Nodes aktualisieren
+		○ Ist das wirklich sicher nicht transitiv???
+	• Parallelisierungsmöglichkeiten:
+		○ Es gibt viele Nodes mit einem ähnlichen / gleichen Rang
+			§ Diese jeweils parallel evaluieren.
+				□ Das würde eine Kopie des Graphen erfordern, aber viele neue Tasks erzeugen.
+				□ Wenn man genügend Tasks hat, die Berechung zuende führen.
+				□ Das ist besonders interessant, weil gerade die Entscheidungen am Anfang große Auswirkungen auf das Endergebnis haben.
+		○ Predictions darüber, welche Ranks vermutlich hinreichend unabhängig sind und diese parallel aus dem Graphen entfernen
+	• Weitere Optionen:
+		○ Kanten mit sehr geringen Fehlerwahrscheinlichkeiten entfernen
+		○ Den Rank als gleich der Summe der Kanten ausdrücken und Fehlerwahrscheinlichkeiten ignorieren
